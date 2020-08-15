@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="sample">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Settings</title>
+</head>
+<body>
+    <div >
+        <input type="button" id="btn" onclick="AddNewConfig('','')" value="添加新条目">
+        <input type="button" id="btn2" onclick="ReFresh()" value="显示配置JSON" title="刷新并显示预期的JSON配置文件">
+        <input type="button" id="btn3" onclick="PreView()" value="预览" title="生成当前配置信息的预览导航（跳转地址仅为参考，请重启软件以完成配置）">
+        <input type="button" id="btn4" onclick="SaveCFG()" value="保存最新的配置" title="保存并提交配置，重启后生效">
+        <a href="/.md" target="_blank"> 使用指南 </a>
+        <br/>
+        <div id="too">
+
+        </div>
+    </div>
+    <diV id="v">
+        <br/>
+    </diV>
+
+    <div id="pv">
+
+    </div>
+
+    <script>
+        var objson = {{ .cfg }}
+        var obj = JSON.parse(objson)
+        var NUM = 0
+
+        for(var i =0; i<obj.length; i++){
+            AddNewConfig(obj[i].DirName,obj[i].RealDir)
+        }
+
+        function getAllCFG(){
+            var total = document.getElementsByTagName("input")
+            var ans = [] // 存储有所有配置信息对象
+            var n = 0
+            for(var i=4; i<total.length; i+=2){
+                var objt = {
+                    DirName : total[i].value,
+                    RealDir : total[i+1].value,
+                }
+                ans[n++] = objt
+            }
+            return JSON.stringify(ans)
+        }
+
+        function ReFresh(){
+            // 所有input元素， 头两个为无效内容
+            document.getElementById("too").innerText = getAllCFG() // 将对象转换为JSON
+        }
+
+        function AddNewConfig(left, right) {
+            if(left === ""){
+                left = "输入自定义的目录名"
+            }
+            if(right === ""){
+                right = "输入真实的目录地址"
+            }
+            var lab1 = document.createElement("label")
+            var lab2 = document.createElement("label")
+            var ipt1 = document.createElement("input")
+            var ipt2 = document.createElement("input")
+            var btn1 = document.createElement("button")
+            var br = document.createElement("br")
+            var father = document.getElementById("v")
+            ipt1.id = "IPTL" + NUM
+            ipt2.id = "IPTR" + NUM
+            btn1.id = "BTNL" + NUM
+            NUM++
+            btn1.innerText = "移除该目录"
+            ipt1.value = left
+            ipt2.value = right
+            lab1.innerText = "文件目录别名: "
+            lab2.innerText = "  真实地址: "
+            btn1.onclick = function(){
+                delete(this.parentNode.removeChild(lab2))
+                delete(this.parentNode.removeChild(lab1))
+                delete(this.parentNode.removeChild(ipt1))
+                delete(this.parentNode.removeChild(ipt2))
+                delete(this.parentNode.removeChild(br))
+                delete(this.parentNode.removeChild(btn1))
+            }
+            father.appendChild(lab1)
+            father.appendChild(ipt1)
+            father.appendChild(lab2)
+            father.appendChild(ipt2)
+            father.appendChild(btn1)
+            father.appendChild(br)
+        }
+
+        function PreView() {
+            var father = document.getElementById("pv")
+            father.innerText = ''
+            var inputs = document.getElementsByTagName("input")
+
+            var ans = []
+
+            for(var i=4; i<inputs.length; i+=2){
+                var objt = {
+                    DirName : inputs[i].value,
+                    RealDir : inputs[i+1].value,
+                }
+                ans[(i-2)/2] = objt
+                var lab = document.createElement("a")
+                lab.href = "/example"
+                lab.target = "_blank"
+                lab.innerText = " [" + objt.DirName + "] "
+                var br = document.createElement("br")
+                father.appendChild(lab)
+                father.appendChild(br)
+            }
+        }
+
+        function SaveCFG() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', '/ajax', true);
+            xhr.setRequestHeader("Content-type","application/json;charset-UTF-8");
+            xhr.send(getAllCFG());
+        }
+    </script>
+</body>
+</html>

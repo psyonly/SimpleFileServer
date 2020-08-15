@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+</head>
+<body>
+    <h2>
+        欢迎使用 SimpleFileServer
+    </h2>
+    <div>
+        <label>开发者 : {{ .author }}</label>
+        <label>版本 : {{ .version }}</label>
+        <label>平台 ： {{ .platform }}</label>
+        <form method="get" action="/shutdown">
+            <button id="shutdown" >
+                关机
+            </button>
+        </form>
+        如果你是第一次使用本系统请完成相关配置：
+        <br/>
+        <form method="get" action="/settings" target="_blank">
+            <button id="config" >
+                配置本地文件到此服务器上
+            </button>
+        </form>
+        <br/>
+        <a href="/.md" target="_blank">快速上手</a>
+        <br/>复制此链接即可在此局域网中访问到本系统<a id="homePage" href=""> 主页 </a>
+        <br/>
+    </div>
+    <div id="text">
+        您的服务器IP是 {{ .localIP }}:8080
+        <br/>
+        <hr>
+        文件目录导航：
+        <br/>
+    </div>
+    <div>
+    </div>
+    <div>
+    </div>
+    <div id="json">
+
+    </div>
+    <script>
+        var obj = {{ .dir }} // 从模板中获得配置部分
+        var dirArr = JSON.parse(obj) // 将配置对象转换为易于处理的JSON
+
+        var jso = JSON.stringify(dirArr)
+        //document.getElementById("json").innerText = jso
+        // 返回给服务器一个修改好的配置文件JSON
+
+
+
+
+        // 输出所有的配置及其对应链接
+        var div = document.getElementById("text")
+        for(var i=0; i<obj.length; i++){
+            var link = document.createElement("a")
+            link.setAttribute("href",dirArr[i].DirName)
+            link.innerText = dirArr[i].DirName
+            div.appendChild(link)
+            var br = document.createElement("br")
+            //br.innerText = "<br/>"
+            div.appendChild(br)
+        }
+
+    </script>
+</body>
+</html>

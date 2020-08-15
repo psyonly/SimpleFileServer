@@ -1,0 +1,528 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>devLog</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+svg[id^="mermaidChart"] { line-height: 1em; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    padding-bottom: .3em;
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+   padding-bottom: .3em;
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table tr th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+
+</style>
+</head>
+<body class='typora-export os-windows' >
+<div  id='write'  class = ''><h2><a name="软件开发文档与使用指南" class="md-header-anchor"></a><span>软件开发文档与使用指南</span></h2><p><span>version Beta 1.0.1</span><span>		</span><span>开发者：psyonly</span><span>		</span><span>GitHub：</span><a href='https://github.com/psyonly'><span>https://github.com/psyonly</span></a><span> </span><span>		</span><span>mail：</span><a href='mailto:amazing_tree@qq.com' target='_blank' class='url'>amazing_tree@qq.com</a><span>		</span></p><p><strong><span>如果您想查阅有关如何使用本软件，</span><a href = "#help"><span>请点击此处查看帮助</span></a></strong></p><p><strong><span>如果您是专业人员想要了解软件的工作原理请直接往下看。</span></strong><span>  </span></p><hr /><h3><a name="需求分析" class="md-header-anchor"></a><span>需求分析</span></h3><p><span>本软件方向是局域网下的简单文件站（FTP）</span><br/><span>界面更友好，配置更简单，不需要开启太多服务利用软件自身的功能即可实现</span><br/><span>市面上有着许多文件传输软件，而他们大多都有自己软件的特性，其中不乏有优秀之辈，但也存在各自的缺点。</span><br/><span>常见的问题有：依赖操作系统自身服务功能、架设麻烦、需要下载很多支持库等。</span><br/><span>这里并没有详细的谈传输速度的问题，因为大多数文件传输服务都依赖于当前局域网的网络质量和数据量，本软件也如此，故在可能给予的本地带宽的基础上尽量高质量的追求传输速度和并发度。  </span></p><p><span>作为开发者，我当然希望我的程序足够简单、方便架设并足够用来满足用户的需求，在这个初衷上我尽量的减小软件所需的代价并为用户减少不必要的功能，除非用户提出自己的需求，我会努力的去实现这些有必要的功能。  </span></p><p><span>本软件是我从我之前的SDUSTSourceServer项目中剥离下载服务而开发的，如果想了解关于SDUSTSourceServer的内容请访问链接：</span><a href='https://github.com/psyonly/SDUSTSourceServer'><span>https://github.com/psyonly/SDUSTSourceServer</span></a></p><hr /><h3><a name="功能描述" class="md-header-anchor"></a><span>功能描述</span></h3><p><span>本软件是依托HTTP网页传输而实现的。</span><br/><span>用户第一次使用时需要配置服务器，完成目标文件所在目录的配置。</span><br/><span>服务器运行时会生成一个页面，引导用户完成基础配置工作，而用户的任务很简单，只需要在对应的地方设置目录地址以及目录对应的名称。</span><br/><span>用户可以添加任意个文件目录，并为他们命名，当用户按下提交按钮时，服务器会接收前端发送来的新的配置信息，并将其保存在服务器目录中更新配置文件。</span><br/><span>完成配置后服务器会刷新文件目录，给与用户显示最新的文件列表，而用户所做的只是简单的刷新页面即可。</span></p><p><span>刷新后的网页会展示最新的文件目录，用户可以访问任意一个目录进行下载服务。  </span></p><hr /><h3><a name="模块设计" class="md-header-anchor"></a><span>模块设计</span></h3><p><span>将项目拆分成简单的几个小模块</span><br/><strong><span>配置文件</span></strong><span>|</span><strong><span>服务器端</span></strong><span>|</span><strong><span>前端用户接口</span></strong><span>  </span></p><p><span>我会就其中的每个模块进行详细的设计描述  </span></p><hr /><p><strong><span>配置文件</span></strong><span></span><br/><span>这是我首次使用配置文件来设计软件，我希望通过设计配置文件这一部分内容可以很好的简化程序组成、规范化/模式化软件设计。</span><br/><span>依托于配置文件，用户只需要更改配置文件就可以实现自己的需求，而不需要进行其他复杂的操作。对于用户而言，只需要知道自己要下载哪个目录下的文件并将其配置好即可；  对于开发者而言，将复杂的工程抽象为：  </span></p><p><span>1.以配置文件为中间件  </span></p><p><span>2.着力解决如何接收用户的信息并将这些信息按照格式储存在配置文件中  </span></p><p><span>3.读取配置文件并刷新服务器内容</span></p><p><span>可以看到，配置文件这一设计可以简单的抽象出当前模块的工作任务，这对开发者而言是一种清晰的目标，能够加快开发速度并且规范化开发步骤。  </span></p><p><strong><span>配置文件类型</span></strong></p><p><em><span>JSON</span></em><span> </span></p><p><span>选择JSON是因为容易配置，暴露给用户的实现细节少，并且JSON文件够轻量，不会给开发带来太多困难。  </span></p><p><span>JSON文件的格式很适合当作本软件的配置文件，原因之一就是本软件对于用户唯一需要写入数据的只有地址这一数据，作为键值对的形式很适合程序的读取和维护。  </span></p><p><strong><span>配置文件内容</span></strong></p><p><span>在第一版中设计初衷是JSON配置文件是JSON的数组，第一个数据对是路径的自定义名称，这个设计是为了便于用户查看和管理自己的文件目录；第二个数据就是名称对应的确定的文件路径，只需要告诉用户如何去找到这个路径就可以直接写入，引导用户使用复制的方法可以避免用户使用错误的路径。  </span></p><p><strong><span>配置文件交互</span></strong></p><p><span>与配置文件交互的唯一部分是服务器部分  </span></p><p><em><span>用户接口</span></em><span> : 用户在前端的表格中添加或删除部分目录，提交表格后刷新页面，所提交的内容会以JSON的形式传递给后端。  </span></p><p><em><span>后端接口</span></em><span> : 后端可以读取配置文件，在服务器中渲染并生成指定的项目，将配置中所有的目录信息以JSON的形式输出到前端给用户形成页面；后端接收来在前端用户对配置文件的改动，读取并修改配置文件，重新渲染所有的目录。  </span></p><hr /><p><strong><span>服务器端</span></strong><span>  </span></p><p><span>服务器端作为系统的核心部分在此简述其工作原理。  </span></p><p><span>服务器采用Go语言设计，利用了一些http包实现了简单的服务器搭建，相较于其他技术所需的部署更为简单，开发也较为方便，开发人员只需集中精力于功能的编码实现上即可，不必像其他服务器搭建一样需要准备较多的环境部署。  </span></p><p><span>简单地将服务器划分为以下几个部分：  </span></p><p><strong><span>服务器初始化</span></strong><span>|</span><strong><span>页面生成与响应监听</span></strong><span>|</span><strong><span>静态路径生成</span></strong><span>|</span><strong><span>配置文件解析与重写</span></strong><span>  </span></p><hr /><p><em><span>服务器初始化</span></em><span>  </span></p><p><span>本部分包含的任务主要有路由生成、IP初始化、以及最终的服务启动三个部分。  </span></p><p><span>生成路由是为了后续的页面响应以及下载服务开启，主要利用了gin框架的路由功能。  </span></p><p><span>IP初始化用于反馈用户入口地址，在前端生成服务器的链接，方便用户访问服务器。由服务器获取网卡信息并提取出IP地址来实现。  </span></p><p><span>服务启动是等服务器所有的任务设置完成后进行的启动服务，开启一个执行操作系统命令的进程，自动开启浏览器并指向服务器主页（主页地址由第二步的IP初始化获取），用户可以关闭此进程来结束服务器的运行。  </span></p><hr /><p><strong><span>页面生成与监听响应</span></strong><span>  </span></p><p><span>为了减少服务器开发和维护的开销，尽量的减少页面设计，服务器只接受少数的GET响应来生成前端页面，对于POST请求，服务器只接受用户对配置文件的修改。  </span></p><p><span>服务器生成一个GET请求来提供用户访问文件目录的接口，当用户发送这个请求后服务器响应并完成信息的传输，传送给前端的信息是少数控制信息和一个完整的目录配置。  </span></p><p><span>服务会生成一个POST请求来应对用户对配置文件的修改，当用户修改好配置信息并提交的时候将会由服务器接收请求并完成配置信息的重写和保存。  </span></p><hr /><p><strong><span>静态路径生成</span></strong></p><p><span>服务器开启时会读取配置文件并以文件内容初始化一个Module切片，根据此Module中的字段遍历生成一系列的文件目录及其对应的URL接口。生成完毕后用户即可访问对应目录的URL，进而访问到对应的资源。  </span></p><p><em><span>Module内容设置</span></em></p><p><span>该结构体包含两个字段DirName和RealDir，分别表示URL路径名和真实的物理路径。  </span></p><p><span>静态路径生成后会占用唯一的路径名，而用户在配置完成后需要重启服务器才能重新加载资源。  </span></p><p><span>服务器的最终目标是不用使得用户手动关闭服务器即可重载静态路径。  </span></p><hr /><p><strong><span>配置文件解析与重写</span></strong></p><p><span>服务器内有独立的读取配置文件功能与重写功能。  </span></p><p><span>配置文件读取时读取到服务器中的一个Module，服务器根据此结构体生成文件目录并提供下载服务。</span><br/><span>当服务器接收修改配置文件的信息后，执行重写命令，将结构体转换为JSON类型并保存覆盖原来的配置文件。  </span></p><hr /><p><strong><span>前端用户接口</span></strong><span>  </span></p><p><span>软件设计的初衷是要足够简单方便，所以在设计时决定尽量减少前端的页面设计，一则我不是专业的前端开发人员，对前端的技术并不太知晓，而本软件的重点在于其功能性，故只需简单明白的前端设计，足够用户使用即可。  </span></p><p><em><span>主页</span></em><span>  </span></p><p><span>此项为主要内容，可以给予用户使用指南、地址引导、修该配置入口等功能。  </span></p><p><span>设计足够简单，利用了模板返回JSON数据的形式，虽做不到完全的前后端分离工作但同样可以高效和专注的完成前端的工作。  </span></p><p><span>主要用后端返回的数据来形成文件目录地址，让用户知道自己设置的文件目录通过哪个连接可以访问到即可。</span></p><p><em><span>修改配置</span></em><span>  </span></p><p><span>此页面可以从主页跳转而来，也可以通过地址栏直接访问，接收从服务器返回的配置信息，用户可以针对其中的个别条目进行修改/删除，或者增加新的条目，修改完成后返回数据给后端。  </span></p><p><em><span>关机</span></em><span>  </span></p><p><span>访问某个地址或主页上的按钮发送POST请求数据，服务器数据接受数据后完成服务器的关机或重启，本功能依托于服务器提供的接口，可以做到热重启/安全退出。</span></p><hr /><h3><a name="a-name-help使用指南a" class="md-header-anchor"></a><a name ="help"><span>使用指南</span></a><span>  </span></h3><p><span>version Beta 1.0.1</span></p><p><span>目录：</span><a href="#guide"><span>导航页面</span></a><span>|</span><a href="#config"><span>如何配置</span></a><span>|</span><a href="#shutdown"><span>如何关机</span></a><span>|</span><a href="#other"><span>非常规性操作与指令</span></a><span> </span></p><hr /><h5><a name="a-nameguide导航页面a" class="md-header-anchor"></a><a name="guide"><span>导航页面</span></a><span>  </span></h5><p><span>当您启动软件时可能看到以下界面  </span></p><p><img src="pic\image-20200815142506634.png" referrerpolicy="no-referrer" alt="image-20200815142506634"></p><p><span>可以看到在地址栏中的 “192.168.1.107:8080”即为服务器的登录入口，在同一路由器下的所有设备均可通过这个地址访问到此服务器。您可以用您的手机/Pad尝试登录到此服务器。  </span></p><p><em><span>注意：具体地址请以浏览器显示的内容为准，此文档中的地址仅是开发人员给您的参考。</span></em><span>  </span></p><p><span>由于当前版本服务器没有设置密码，所以此局域网中的所有设备均可访问到此服务器。  </span></p><p><span>在启动程序之后可能会弹出一个黑色的窗口（如下），这是服务器运行的标志，当关闭这个窗口后服务器将停止运行，您可以最小化它。在主页上的</span><strong><span>关机</span></strong><span>按钮也是关闭服务器的入口。  </span></p><p><em><span>注意：关闭浏览器并不会导致服务器的运行停止，请以主页按钮操作/关闭CMD窗口/执行”/shutdown指令“来关闭服务器</span></em><span>  </span></p><p><span>点击”配置文件到本服务器上“即可完成配置功能。  </span></p><p><span>服务器运行初始即会读取</span><strong><span>配置文件</span></strong><span>来生成所有的文件目录，点击对应名称的目录就可以在网络浏览器上访问到这台电脑上的文件。</span></p><hr /><h5><a name="a-nameconfig如何配置a" class="md-header-anchor"></a><a name="config"><span>如何配置</span></a></h5><p><span>从主页跳转到配置页面后您可能会看到如下内容：  </span></p><p><img src="pic\image-20200815143656903.png" referrerpolicy="no-referrer" alt="image-20200815143656903"></p><p><span>您的服务器启动后可能出现若干条目录条目，每条条目的第一个输入框中输入自定义的目录名称，而第二个输入框是其真实的文件地址。  </span></p><p><span>例如：  </span></p><p><span>在我的电脑上“E:\icon” 文件夹中有我想要访问的文件。  </span></p><p><img src="pic\image-20200815144110347.png" referrerpolicy="no-referrer" alt="image-20200815144110347"></p><p><span>点击添加新条目，在文件目录别名中输入”图标“， 在真实地址中输入”E:\icon“即可完成添加。  如果不知道地址如何填写，可以点击当前文件夹的地址栏，全选所有内容后复制粘贴到”真是地址“即可。  </span></p><p><img src="pic\image-20200815144323710.png" referrerpolicy="no-referrer" alt="image-20200815144323710"></p><p><span>您也可以在一条条目的后面点击删除来移除这一条目录。  </span></p><p><span>配置完成后点击预览来生成一串链接来预览效果，这些链接只是预览效果，并不代表最终的访问地址。  </span></p><p><span>如果您了解JSON的使用方法也可以显示配置的JSON预览形式。  </span></p><p><span>完成所有配置工作后点击保存即可完成配置文件的保存，服务器会根据您的配置生成新的文件目录，只有在关闭服务器后的下一次开启才会生效。我们强烈建议您在完成配置后重启软件。  </span></p><hr /><h5><a name="a-nameshutdown如何关机a" class="md-header-anchor"></a><a name="shutdown"><span>如何关机</span></a></h5><p><span>您可以在初始界面上点击关机按钮来关闭服务器，执行操作会一同关闭CMD命令窗口。  </span></p><p><span>您也可以直接关闭黑色的CMD命令窗口。</span></p><p><em><span>关机后所有的访问都将无效，请确保当前没有下载任务正在执行，服务器并不支持断点续传所以发生的所有下载错误都将无法挽回。</span></em></p><hr /><h5><a name="a-nameother非常规性操作与指令a" class="md-header-anchor"></a><a name="other"><span>非常规性操作与指令</span></a></h5><p><span>服务器的配置文件在软件文件夹下的config.json中，以json的格式存储有若干个键值对，每个json对象第一个键值对是目录名称，第二个是真实地址，如果您了解json的使用可以在文件中直接更改。以此种方法进行配置时请事先备份好配置文件格式。  </span></p><p><span>您同样可以在地址栏中输入&quot;IP:8080/shutdown&quot;指令来关机，其中IP即为服务器的ip地址，使用此方法与其他方法关机效果等同。</span></p><hr /><p><span>如有使用问题或有更好的建议请联系我mail：</span><a href='mailto:amazing_tree@qq.com' target='_blank' class='url'>amazing_tree@qq.com</a></p></div>
+</body>
+</html>
